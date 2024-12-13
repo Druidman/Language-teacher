@@ -4,6 +4,11 @@
 
 It's a language learning app. Instead of fancy quizzes it takes word list and turns it into `pretty word list`
 
+## How to run it
+
+Run `git clone <repo link>`<br>
+Open html file in the browser and you are all set!
+
 ## How to use it?
 
 You need to load `.json` file with word pairs that you want to learn. <br><br>
