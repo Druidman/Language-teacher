@@ -7,25 +7,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header></header>
+    
     <main>
-        <div id="controlPanel">
-            <button class="controlButton" id="swapButton">SWAP</button>
-            <button class="controlButton">BATCH</button>
-
-            <label for="fileInput" class="fileUpload">Upload Words</label>
-            
-            <input type="file" id="fileInput" accept=".json" />
-                
-            
-            
-        </div>
-        <div id="mainContainer">
-            <div id="descriptionBox">
-                <div class="word">Main word</div>
-                <div class="word">Translated word</div>
+        <section id="controlSection" class="mainSection">
+            <div id="controlButtons" class="mainBox">
+                <button class="controlButton" id="swapButton">SWAP</button>
+                <button class="controlButton" id="batchButton">BATCH</button>
             </div>
-            <div id="wordContainer">
+            
+            <div id="fileUploadBox" class="mainBox">
+                <label for="fileInput" class="fileInputLabel">Upload words</label>
+                <input type="file" id="fileInput" accept=".json"/>
+            </div>
+            
+        </section>
+
+        <section id="learningSection" class="mainSection">
+            <div id="descriptionBox" class="mainBox">
+                <div class="descriptionWord">Main word</div>
+                <div class="descriptionWord">Translated word</div>
+            </div>
+            <div id="wordContainer" class="mainBox">
                 <div class="wordBox" id="0">
 
                     <div class="word mainWord">special</div>
@@ -39,10 +41,9 @@
     
                 </div>
             </div>
-            
-            
+        </section>
 
-        </div>
+
         
 
     </main>

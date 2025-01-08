@@ -3,13 +3,17 @@ function insertElements(jsonData){
         return
     }
     
-    var objects = jsonData["Words"]
+    var elements = jsonData["Words"]
+    if (!elements){
+        return
+    }
 
     var wordContainer = document.getElementById("wordContainer")
     wordContainer.innerHTML = ""
-    var i =0
-    for (object of objects){
-        var wordBox = constructWordBox(object["mainWord"],object["otherWord"],i)
+
+    var i = 0
+    for (element of elements){
+        var wordBox = constructWordBox(element["mainWord"],element["otherWord"],i)
         wordContainer.appendChild(wordBox)
         i+= 1
     }
@@ -21,17 +25,14 @@ function constructWordBox(mainWord,otherWord,id){
     wordBox.setAttribute("id",id)
 
     var mainWordElement = document.createElement("div")
-    mainWordElement.classList.add("word")
-    mainWordElement.classList.add("mainWord")
+    mainWordElement.classList.add("word","mainWord")
     mainWordElement.innerHTML = mainWord
 
     var otherWordElement = document.createElement("div")
-    otherWordElement.classList.add("word")
-    otherWordElement.classList.add("otherWord")
+    otherWordElement.classList.add("word","otherWord")
     otherWordElement.innerHTML = otherWord
 
-    wordBox.append(mainWordElement)
-    wordBox.append(otherWordElement)
+    wordBox.append(mainWordElement,otherWordElement)
 
     return wordBox
 
@@ -44,31 +45,29 @@ function swap(){
         var mainWord = wordBox.getElementsByClassName("mainWord")[0]
         var otherWord = wordBox.getElementsByClassName("otherWord")[0]
 
-        var mainContent = mainWord.innerHTML
+        var mainWordContent = mainWord.innerHTML
         mainWord.innerHTML = otherWord.innerHTML
-        otherWord.innerHTML = mainContent
+        otherWord.innerHTML = mainWordContent
     }
 }
 function handleFile(event){
-    const file = event.target.files[0]
+    const file = event.currentTarget.files[0]
 
     const reader = new FileReader()
-    reader.onload = (e) => {    
-
-        const jsonData = JSON.parse(e.target.result)
+    reader.addEventListener("load",(event)=>{
+        const jsonData = JSON.parse(event.currentTarget.result)
         
         insertElements(jsonData)
-        
-        
-    }
+    })
+    
     reader.readAsText(file)
 
 }
 
 document.getElementById("swapButton").addEventListener("click",swap)
-fileInput = document.getElementById("fileInput")
+document.getElementById("fileInput").addEventListener('change', handleFile)
 
-fileInput.addEventListener('change', handleFile)
+
         
 
 
