@@ -39,6 +39,7 @@ section#controlSection {
     height: 100%;
     flex-direction: column;
     justify-content: space-between;
+    
 }
 section#learningSection {
     width: 90%;
@@ -140,10 +141,7 @@ section#learningSection {
 
 .otherWord {
     color: #1e1e1e;
-    transition: 500ms;
-}
-.wordBox:hover .otherWord{
-    color: #888;
+    transition: 0.2s;
 }
 
 
