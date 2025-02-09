@@ -105,9 +105,69 @@ function learnMode(event){
 
 }
 
+function showAllWords(){
+    let elements = document.getElementsByClassName("wordBox")
+    for (let element of elements){
+        element.style.display = ""
+    }
+}
+
+
+function batchButtonEvent(event){
+    let currentMode = event.currentTarget.getAttribute("data-mode")
+    if (currentMode == "batch"){
+        event.currentTarget.setAttribute("data-mode","normal")
+        showAllWords()
+        return
+    }
+    event.currentTarget.setAttribute("data-mode","batch")
+    batch(event.currentTarget)
+}
+function batch(batchButton){
+    let elements = document.getElementsByClassName("wordBox")
+    let batchNum = Number(batchButton.getAttribute("data-batchNum"))
+    for (let i=0; i<elements.length; i++){
+        if (i <= batchNum*20 && i>= (batchNum-1)*20){
+            elements[i].style.display = ''
+            continue
+        }
+        elements[i].style.display = 'none'
+    }
+
+}
+
+function batchNextEvent(event){
+    let batchButton = document.getElementById("batchButton")
+    let mode = batchButton.getAttribute("data-mode")
+    if (mode != "batch"){
+        return
+    }
+    let batchNum = Number(batchButton.getAttribute("data-batchNum"))
+    batchButton.setAttribute("data-batchNum",batchNum + 1)
+    batch(batchButton)
+    
+    
+}
+
+function batchPrevEvent(event){
+    let batchButton = document.getElementById("batchButton")
+    let mode = batchButton.getAttribute("data-mode")
+    if (mode != "batch"){
+        return
+    }
+    let batchNum = Number(batchButton.getAttribute("data-batchNum"))
+    batchButton.setAttribute("data-batchNum",batchNum - 1)
+    batch(batchButton)
+   
+    
+}
+
 document.getElementById("swapButton").addEventListener("click",swap)
 document.getElementById("fileInput").addEventListener('change', handleFile)
 document.getElementById("learnModeButton").addEventListener("click",learnMode)
+document.getElementById("batchButton").addEventListener("click",batchButtonEvent)
+document.getElementById("batchNextButton").addEventListener("click",batchNextEvent)
+document.getElementById("batchPrevButton").addEventListener("click",batchPrevEvent)
 
 
 
